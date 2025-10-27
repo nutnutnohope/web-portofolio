@@ -1,0 +1,132 @@
+<?php require_once 'functions.php'; ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <img src="https://th.bing.com/th/id/OIP.Arc10Mc6B_v2m2w95eI09AHaHa?w=179&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Your Photo" loading="lazy">
+      <h1>Mas Amba</h1>
+      <p>Web Developer | Designer | Creative Thinker</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Write a brief introduction about yourself here.</p>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+      <div class="projects">
+        <?php 
+        $projects = getProjects();
+        if (!empty($projects)):
+            foreach ($projects as $project): 
+        ?>
+            <div class="project-card">
+                <h3><?php echo htmlspecialchars($project['title']); ?></h3>
+                <p><?php echo htmlspecialchars($project['description']); ?></p>
+                <div class="project-links">
+                    <a href="<?php echo htmlspecialchars($project['demo_link']); ?>" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Demo
+                    </a>
+                    <a href="<?php echo htmlspecialchars($project['github_link']); ?>" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        <?php 
+            endforeach;
+        else:
+        ?>
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>Project description goes here.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>Project description goes here.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 3</h3>
+                <p>Project description goes here.</p>
+            </div>
+        <?php endif; ?>
+      </div>
+    </section>
+
+    <section class="skills">
+      <h2>My Skills</h2>
+      <div class="skill-icons">
+        <?php 
+        $skills = getSkills();
+        if (!empty($skills)):
+            foreach ($skills as $skill): 
+        ?>
+            <span data-skill="<?php echo htmlspecialchars($skill['name']); ?>">
+                <i class="<?php echo htmlspecialchars($skill['icon']); ?>"></i>
+                <?php echo htmlspecialchars($skill['name']); ?>
+            </span>
+        <?php 
+            endforeach;
+        else:
+        ?>
+            <span><i class="fab fa-html5"></i> HTML5</span>
+            <span><i class="fab fa-css3-alt"></i> CSS3</span>
+            <span><i class="fab fa-js"></i> JavaScript</span>
+            <span><i class="fab fa-react"></i> React</span>
+            <span><i class="fab fa-node-js"></i> Node.js</span>
+        <?php endif; ?>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <div class="contact-form">
+        <form action="" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" name="contact">Send Message</button>
+        </form>
+      </div>
+      <div class="social-links">
+        <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <?php echo date('Y'); ?> mas amba. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
